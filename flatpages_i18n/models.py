@@ -1,7 +1,7 @@
 from django.contrib.sites.models import Site
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
-
+from django.utils.translation import get_language, ugettext_lazy as _
+from django.conf import settings
 
 class FlatPage_i18n(models.Model):
     WEIGHT = [(i, i) for i in range(10)]
@@ -30,6 +30,8 @@ class FlatPage_i18n(models.Model):
         return u"%s -- %s" % (self.url, self.title)
 
     def get_absolute_url(self):
+        if settings.PREFIX_DEFAULT_LOCALE:
+            return '/%s%s' % (get_language(), self.url)
         return self.url
 
     class Meta:
