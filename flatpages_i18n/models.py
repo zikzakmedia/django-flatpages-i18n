@@ -22,6 +22,10 @@ class FlatPage_i18n(models.Model):
         _(u'weight'), null=True, blank=True, default=0, choices=WEIGHT)
     sites = models.ManyToManyField(Site)
 
+    metatitle = models.CharField(_('Meta Title'), max_length=128, null=True, blank=True)
+    metadescription = models.CharField(_('Meta Description'), max_length=255, null=True, blank=True)
+    metakeyword = models.CharField(_('Meta Keyword'), max_length=255, null=True, blank=True)
+
     def __unicode__(self):
         return u"%s -- %s" % (self.url, self.title)
 
